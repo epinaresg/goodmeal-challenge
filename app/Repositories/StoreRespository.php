@@ -17,9 +17,10 @@ class StoreRespository
         return Store::create($data);
     }
 
-    public function update(Store $store, array $data): bool
+    public function update(Store $store, array $data): Store
     {
-        return $store->update($data);
+        $store->update($data);
+        return $store;
     }
 
     public function delete(Store $store): bool

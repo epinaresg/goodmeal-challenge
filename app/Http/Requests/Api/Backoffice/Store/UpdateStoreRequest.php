@@ -30,6 +30,14 @@ class UpdateStoreRequest extends FormRequest
             'take_out' => 'required|numeric|in:0,1',
             'delivery' => 'required|numeric|in:0,1',
             'rating' => 'required|numeric',
+
+            'schedules.take_out.id' => 'sometimes',
+            'schedules.take_out.start_hour' => 'sometimes|date_format:H:i',
+            'schedules.take_out.end_hour' => 'sometimes|date_format:H:i|after:schedules.take_out.start_hour',
+
+            'schedules.delivery.id' => 'sometimes',
+            'schedules.delivery.start_hour' => 'sometimes|date_format:H:i',
+            'schedules.delivery.end_hour' => 'sometimes|date_format:H:i|after:schedules.delivery.start_hour',
         ];
     }
 }

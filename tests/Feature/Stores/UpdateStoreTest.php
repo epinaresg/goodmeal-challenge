@@ -136,6 +136,50 @@ class UpdateStoreTest extends TestCase
         $this->assertEquals(count($responseData['errors']), 1);
     }
 
+
+    /** @test */
+    public function the_schedules_are_not_required()
+    {
+        $data = $this->getData();
+        unset($data['schedules']);
+
+        $response = $this->makeRequest($this->store->id, $data);
+
+        $response->assertStatus(201, $response->status());
+    }
+
+    /** @test */
+    public function the_schedules_take_out_hour_time_format_is_required()
+    {
+        $data = $this->getData();
+        $data['schedules']['take_out']['start_hour'] = 'asdasd';
+        $data['schedules']['take_out']['end_hour'] = 'asdasd';
+
+        $response = $this->makeRequest($this->store->id, $data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('schedules.take_out.start_hour');
+        $response->assertJsonValidationErrorFor('schedules.take_out.end_hour');
+        $this->assertEquals(count($responseData['errors']), 2);
+    }
+
+    /** @test */
+    public function the_schedules_delivery_hour_time_format_is_required()
+    {
+        $data = $this->getData();
+        $data['schedules']['delivery']['start_hour'] = 'asdasd';
+        $data['schedules']['delivery']['end_hour'] = 'asdasd';
+
+        $response = $this->makeRequest($this->store->id, $data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('schedules.delivery.start_hour');
+        $response->assertJsonValidationErrorFor('schedules.delivery.end_hour');
+        $this->assertEquals(count($responseData['errors']), 2);
+    }
+
     /** @test */
     public function can_be_updated()
     {
@@ -157,6 +201,9 @@ class UpdateStoreTest extends TestCase
     private function getData(): array
     {
         $name = $this->faker->company();
+
+        $startTime1 = rand(10, 14);
+        $startTime2 = rand(10, 14);
         return [
             'logo' => $this->faker->url(),
             'name' => $name,
@@ -165,6 +212,16 @@ class UpdateStoreTest extends TestCase
             'rating' => rand(1, 5),
             'delivery' => rand(0, 1),
             'take_out' => rand(0, 1),
+            'schedules' => [
+                'take_out' => [
+                    'start_hour' => $startTime1 . ':00',
+                    'end_hour' => rand($startTime1 + 1, 23) . ':00'
+                ],
+                'delivery' => [
+                    'start_hour' => $startTime2 . ':00',
+                    'end_hour' => rand($startTime2 + 1, 23) . ':00'
+                ]
+            ]
         ];
     }
 

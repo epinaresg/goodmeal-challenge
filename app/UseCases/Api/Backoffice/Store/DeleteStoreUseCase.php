@@ -1,18 +1,16 @@
 <?php
 
-namespace App\UseCases;
+namespace App\UseCases\Api\Backoffice\Store;
 
 use App\Models\Store;
 use App\Repositories\StoreRespository;
-use Illuminate\Support\Str;
 
 class DeleteStoreUseCase
 {
     private $repository;
-    public function __construct(
-        StoreRespository $storeRespository
-    ) {
-        $this->repository = $storeRespository;
+    public function __construct()
+    {
+        $this->repository = new StoreRespository();
     }
 
     public function __invoke(Store $store): void

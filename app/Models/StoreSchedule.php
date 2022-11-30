@@ -7,26 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 
-class Store extends Model
+class StoreSchedule extends Model
 {
     use HasFactory;
     use HasUlids;
     use SoftDeletes;
 
     protected $fillable = [
-        'logo',
-        'name',
-        'address',
-
-        'slug',
-
-        'delivery',
-        'take_out',
-        'rating'
+        'store_id',
+        'type',
+        'start_hour',
+        'end_hour',
     ];
-
-    public function schedules()
-    {
-        return $this->hasMany(StoreSchedule::class);
-    }
 }

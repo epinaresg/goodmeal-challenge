@@ -1,7 +1,8 @@
 <?php
 
-namespace App\UseCases;
+namespace App\UseCases\Api\Backoffice\Store;
 
+use App\Models\Store;
 use App\Repositories\StoreRespository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
@@ -9,13 +10,12 @@ use Illuminate\Support\Str;
 class CreateStoreUseCase
 {
     private $repository;
-    public function __construct(
-        StoreRespository $storeRespository
-    ) {
-        $this->repository = $storeRespository;
+    public function __construct()
+    {
+        $this->repository = new StoreRespository();
     }
 
-    public function __invoke(array $data): void
+    public function __invoke(array $data): Store
     {
         $store = $this->repository->byName($data['name']);
 
@@ -25,6 +25,6 @@ class CreateStoreUseCase
 
         $data['slug'] = Str::slug($data['name']);
 
-        $this->repository->create($data);
+        return $this->repository->create($data);
     }
 }
