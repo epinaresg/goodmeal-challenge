@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,6 +45,33 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(function (Throwable $e, $request) {
+            if ($request->expectsJson()) {
+                if ($e instanceof HttpException) {
+                    return response()->json([], $e->getStatusCode());
+                } elseif ($e  instanceof QueryException) {
+                    return response()->json(app()->environment() !== 'production' ? ['message' => $e->getMessage()] : [], 500);
+                } elseif (get_class($e) === 'Illuminate\Auth\AuthenticationException') {
+                    return response()->json(['message' => $e->getMessage()], 401);
+                } elseif (get_class($e) !== 'Illuminate\Validation\ValidationException') {
+                    if (app()->environment() !== 'production') {
+                        return response()->json(
+                            [
+                                'message' => $e->getMessage(),
+                                'exception' => get_class($e),
+                                'file' => $e->getFile(),
+                                'line' => $e->getLine(),
+                                'trace' => $e->getTrace()
+                            ],
+                            ($e->getCode() ? $e->getCode() : 500)
+                        );
+                    } else {
+                        return response()->json(['message' => $e->getMessage()], ($e->getCode() ? $e->getCode() : 500));
+                    }
+                }
+            }
+        });
+
         $this->reportable(function (Throwable $e) {
             //
         });

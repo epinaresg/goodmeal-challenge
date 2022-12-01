@@ -38,6 +38,19 @@ class UpdateStoreTest extends TestCase
     }
 
     /** @test */
+    public function the_name_cant_be_duplicated()
+    {
+        $store = $this->createStore();
+
+        $data = $this->getData();
+        $data['name'] = $store->name;
+
+        $response = $this->makeRequest($this->store->id, $data);
+
+        $response->assertStatus(400, $response->status());
+    }
+
+    /** @test */
     public function the_logo_is_required()
     {
         $data = $this->getData();
@@ -188,14 +201,14 @@ class UpdateStoreTest extends TestCase
 
         $response->assertStatus(201, $response->status());
 
-        $paymentMethod = Store::find($this->store->id);
+        $store = Store::find($this->store->id);
 
-        $this->assertEquals($data['name'], $paymentMethod->name);
-        $this->assertEquals($data['logo'], $paymentMethod->logo);
-        $this->assertEquals($data['address'], $paymentMethod->address);
-        $this->assertEquals($data['delivery'], $paymentMethod->delivery);
-        $this->assertEquals($data['take_out'], $paymentMethod->take_out);
-        $this->assertEquals($data['rating'], $paymentMethod->rating);
+        $this->assertEquals($data['name'], $store->name);
+        $this->assertEquals($data['logo'], $store->logo);
+        $this->assertEquals($data['address'], $store->address);
+        $this->assertEquals($data['delivery'], $store->delivery);
+        $this->assertEquals($data['take_out'], $store->take_out);
+        $this->assertEquals($data['rating'], $store->rating);
     }
 
     private function getData(): array

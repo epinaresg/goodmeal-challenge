@@ -11,13 +11,7 @@ class DeleteStoreController extends Controller
 {
     public function __invoke(Store $store): JsonResponse
     {
-        try {
-            (new DeleteStoreUseCase())->__invoke($store);
-            return response()->json([], JsonResponse::HTTP_CREATED);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage()
-            ], $e->getCode());
-        }
+        (new DeleteStoreUseCase())->__invoke($store);
+        return response()->json([], JsonResponse::HTTP_CREATED);
     }
 }

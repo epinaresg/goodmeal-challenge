@@ -29,4 +29,14 @@ class Store extends Model
     {
         return $this->hasMany(StoreSchedule::class);
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
