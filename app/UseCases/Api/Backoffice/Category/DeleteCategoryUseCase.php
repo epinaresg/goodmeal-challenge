@@ -5,14 +5,17 @@ namespace App\UseCases\Api\Backoffice\Category;
 use App\Models\Category;
 use App\Models\Store;
 use App\Repositories\CategoryRespository;
+use App\Repositories\ProductCategoryRespository;
 use Illuminate\Http\JsonResponse;
 
 class DeleteCategoryUseCase
 {
-    private $repository;
+    private $categoryRepository;
+    private $productCategoryRepository;
     public function __construct()
     {
-        $this->repository = new CategoryRespository();
+        $this->categoryRepository = new CategoryRespository();
+        $this->productCategoryRepository = new ProductCategoryRespository();
     }
 
     public function __invoke(Store $store, Category $category): void
@@ -21,6 +24,7 @@ class DeleteCategoryUseCase
             throw new \Exception('La categoria no pertenece a esta tienda.', JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        $this->repository->delete($category);
+        $this->categoryRepository->delete($category);
+        $this->productCategoryRepository->deleteByCategory($category);
     }
 }

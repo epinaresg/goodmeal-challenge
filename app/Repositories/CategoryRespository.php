@@ -5,10 +5,16 @@ namespace App\Repositories;
 use App\Models\Category;
 use App\Models\Store;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class CategoryRespository
 {
-    public function get(Store $store): LengthAwarePaginator
+    public function get(Store $store): Collection
+    {
+        return $store->categories()->get();
+    }
+
+    public function paginate(Store $store): LengthAwarePaginator
     {
         return $store->categories()->paginate();
     }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\App\ListStoresGroupByStockController;
+use App\Http\Controllers\Api\App\ShowStoreController as AppShowStoreController;
 use App\Http\Controllers\Api\Backoffice\Category\CreateCategoryController;
 use App\Http\Controllers\Api\Backoffice\Category\DeleteCategoryController;
 use App\Http\Controllers\Api\Backoffice\Category\ListCategoriesController;
@@ -48,4 +50,10 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/back-office/stores/{store}/products', CreateProductController::class);
     Route::put('/back-office/stores/{store}/products/{product}', UpdateProductController::class);
     Route::delete('/back-office/stores/{store}/products/{product}', DeleteProductController::class);
+
+
+
+
+    Route::get('/stores', ListStoresGroupByStockController::class);
+    Route::get('/stores/{store}', AppShowStoreController::class);
 });

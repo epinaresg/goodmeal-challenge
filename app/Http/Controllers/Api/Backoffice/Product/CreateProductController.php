@@ -8,6 +8,8 @@ use App\Models\Store;
 use App\UseCases\Api\Backoffice\Product\CreateProductUseCase;
 use App\UseCases\Api\Backoffice\ProductCategory\CreateProductCategoryUseCase;
 use App\UseCases\Api\Backoffice\ProductCategory\DeleteProductCategoriesUseCase;
+use App\UseCases\Api\Backoffice\Store\SetStorePricesUseCase;
+use App\UseCases\Api\Backoffice\Store\SetStoreWithProductsUseCase;
 use Illuminate\Http\JsonResponse;
 
 class CreateProductController extends Controller
@@ -24,6 +26,9 @@ class CreateProductController extends Controller
         } else {
             (new DeleteProductCategoriesUseCase())->__invoke($product);
         }
+
+        (new SetStoreWithProductsUseCase())->__invoke($store);
+        (new SetStorePricesUseCase())->__invoke($store);
 
         return response()->json([], JsonResponse::HTTP_CREATED);
     }

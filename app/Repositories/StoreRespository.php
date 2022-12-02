@@ -4,10 +4,16 @@ namespace App\Repositories;
 
 use App\Models\Store;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class StoreRespository
 {
-    public function get(): LengthAwarePaginator
+    public function get(): Collection
+    {
+        return Store::all();
+    }
+
+    public function paginate(): LengthAwarePaginator
     {
         return Store::paginate();
     }

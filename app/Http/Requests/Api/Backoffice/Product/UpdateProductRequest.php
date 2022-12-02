@@ -30,6 +30,8 @@ class UpdateProductRequest extends FormRequest
             'price_with_discount' => 'required|numeric|lte:price_without_discount',
             'price_without_discount' => 'required|numeric',
 
+            'stock' => 'required|numeric',
+
             'product_categories' => 'array',
 
             'product_categories.*.id' => 'sometimes',

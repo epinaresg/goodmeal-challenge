@@ -16,6 +16,6 @@ class ListCategoriesUseCase
 
     public function __invoke(Store $store): LengthAwarePaginator
     {
-        return $this->repository->get($store);
+        return $this->repository->paginate($store);
     }
 }

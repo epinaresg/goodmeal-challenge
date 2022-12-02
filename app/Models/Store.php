@@ -22,7 +22,11 @@ class Store extends Model
 
         'delivery',
         'take_out',
-        'rating'
+        'rating',
+
+        'products_with_stock',
+        'price_with_discount',
+        'price_without_discount'
     ];
 
     public function schedules()

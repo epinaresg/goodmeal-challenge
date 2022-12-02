@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
 
@@ -25,6 +26,11 @@ class ProductCategoryRespository
     public function deleteByProduct(Product $product): bool
     {
         return $product->product_categories()->delete();
+    }
+
+    public function deleteByCategory(Category $category): bool
+    {
+        return ProductCategory::whereBelongsTo($category)->delete();
     }
 
     public function byId(string $id): ?ProductCategory
