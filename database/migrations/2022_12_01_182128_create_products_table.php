@@ -21,6 +21,7 @@ return new class () extends Migration {
 
             $table->string('name');
             $table->string('image');
+            $table->integer('stock')->default(0);
 
             $table->decimal('price_with_discount')->default(0);
             $table->decimal('price_without_discount')->default(0);

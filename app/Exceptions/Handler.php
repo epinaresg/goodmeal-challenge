@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
                 if ($e instanceof HttpException) {
                     return response()->json([], $e->getStatusCode());
                 } elseif ($e  instanceof QueryException) {
-                    return response()->json(app()->environment() !== 'production' ? ['message' => $e->getMessage()] : [], 500);
+                    return response()->json(app()->environment() !== 'production' ? ['message' => $e->getMessage()] : ['message' => 'Query Exception'], 500);
                 } elseif (get_class($e) === 'Illuminate\Auth\AuthenticationException') {
                     return response()->json(['message' => $e->getMessage()], 401);
                 } elseif (get_class($e) !== 'Illuminate\Validation\ValidationException') {
