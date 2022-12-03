@@ -59,7 +59,7 @@ $primary-bg-color: #f3f1fe;
     top: 72px;
     padding: 0 15px;
     background-color: $white-color;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     .nav {
         border-bottom: 1px solid #ccc;
@@ -86,6 +86,7 @@ $primary-bg-color: #f3f1fe;
         box-shadow: 0 0 7px 2px rgb(0 0 0 / 20%);
         overflow: hidden;
         .background {
+            background-position: center;
             .takeOutOrDeliveryTime {
                 background-color: $primary-color;
                 border-radius: 20px;
@@ -168,6 +169,7 @@ $primary-bg-color: #f3f1fe;
     text-align: center;
     position: fixed;
     bottom: 0;
+    left: 0;
     z-index: 1;
     width: 100%;
     padding: 20px 15px 20px;

@@ -18,11 +18,13 @@ class StoreFactory extends Factory
     public function definition()
     {
         $name = fake()->company();
+
         return [
             'logo' => fake()->url(),
             'background' => fake()->url(),
             'name' => $name,
             'slug' => Str::slug($name, '-'),
+            'products_with_stock' => rand(0, 1),
             'address' => fake()->address(),
             'rating' => rand(1, 5),
             'delivery' => rand(0, 1),

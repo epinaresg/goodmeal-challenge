@@ -1,17 +1,18 @@
 <?php
 
-namespace Tests\Feature\Stores;
+namespace Tests\Feature\Backoffice\Categories;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class DeleteStoreTest extends TestCase
+class DeleteCategoryTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
 
+    private $category;
     private $store;
 
     protected function setUp(): void
@@ -19,13 +20,14 @@ class DeleteStoreTest extends TestCase
         parent::setUp();
 
         $this->store = $this->createStore();
+        $this->category = $this->createCategory($this->store->id);
     }
 
     /** @test */
     public function invalid_id()
     {
         $response = $this->makeRequest(
-            $this->store->id . '123',
+            $this->category->id . '123',
         );
 
         $response->assertStatus(404, $response->status());
@@ -35,20 +37,20 @@ class DeleteStoreTest extends TestCase
     public function can_be_deleted()
     {
         $response = $this->makeRequest(
-            $this->store->id,
+            $this->category->id,
         );
 
         $response->assertStatus(201, $response->status());
 
-        $this->assertNotEquals($this->store, null);
-        $this->assertNotEquals($this->store->fresh()->deleted_at, null);
+        $this->assertNotEquals($this->category, null);
+        $this->assertNotEquals($this->category->fresh()->deleted_at, null);
     }
 
     private function makeRequest(string $id): TestResponse
     {
         return $this->json(
             'DELETE',
-            '/api/back-office/stores/' . $id,
+            '/api/back-office/stores/' . $this->store->id . '/categories/' . $id,
             [],
             [
                 'Accept' => 'application/json',
