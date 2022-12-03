@@ -61,6 +61,20 @@ class CreateStoreTest extends TestCase
     }
 
     /** @test */
+    public function the_background_is_required()
+    {
+        $data = $this->getData();
+        unset($data['background']);
+
+        $response = $this->makeRequest($data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('background');
+        $this->assertEquals(count($responseData['errors']), 1);
+    }
+
+    /** @test */
     public function the_address_is_required()
     {
         $data = $this->getData();
@@ -214,6 +228,7 @@ class CreateStoreTest extends TestCase
         $startTime2 = rand(10, 14);
         return [
             'logo' => $this->faker->url(),
+            'background' => $this->faker->url(),
             'name' => $name,
             'slug' => Str::slug($name, '-'),
             'address' => $this->faker->address(),

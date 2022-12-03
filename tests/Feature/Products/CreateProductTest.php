@@ -72,6 +72,20 @@ class CreateProductTest extends TestCase
     }
 
     /** @test */
+    public function the_stock_is_required()
+    {
+        $data = $this->getData();
+        unset($data['stock']);
+
+        $response = $this->makeRequest($data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('stock');
+        $this->assertEquals(count($responseData['errors']), 1);
+    }
+
+    /** @test */
     public function the_price_without_discount_is_required()
     {
         $data = $this->getData();
@@ -111,6 +125,7 @@ class CreateProductTest extends TestCase
 
         $this->assertEquals($data['name'], $product->name);
         $this->assertEquals($data['image'], $product->image);
+        $this->assertEquals($data['stock'], $product->stock);
         $this->assertEquals($data['price_without_discount'], $product->price_without_discount);
         $this->assertEquals($data['price_with_discount'], $product->price_with_discount);
         $this->assertEquals($product->price_without_discount > $product->price_with_discount, true);
@@ -131,6 +146,8 @@ class CreateProductTest extends TestCase
 
         return [
             'store_id' => $this->store->id,
+
+            'stock' => rand(0, 10),
             'name' => $this->faker->colorName() . ' product',
             'image' => $this->faker->url(),
             'price_without_discount' => $price,

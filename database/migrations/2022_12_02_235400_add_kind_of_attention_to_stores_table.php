@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->string('kind_of_attention');
+            $table->string('kind_of_attention')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ return new class () extends Migration {
     public function down()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->string('kind_of_attention');
+            $table->string('kind_of_attention')->nullable();
         });
     }
 };

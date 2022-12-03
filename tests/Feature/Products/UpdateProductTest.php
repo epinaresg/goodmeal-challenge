@@ -15,6 +15,7 @@ class UpdateProductTest extends TestCase
     use WithFaker;
 
     private $store;
+    private $product;
     private $qty;
 
     protected function setUp(): void
@@ -27,6 +28,8 @@ class UpdateProductTest extends TestCase
         for ($i = 0; $i < $this->qty; $i++) {
             $this->createCategory($this->store->id);
         }
+
+        $this->product = $this->createProduct($this->store->id);
     }
 
     /** @test */
@@ -58,6 +61,62 @@ class UpdateProductTest extends TestCase
     }
 
     /** @test */
+    public function the_image_is_required()
+    {
+        $data = $this->getData();
+        unset($data['image']);
+
+        $response = $this->makeRequest($this->product->id, $data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('image');
+        $this->assertEquals(count($responseData['errors']), 1);
+    }
+
+    /** @test */
+    public function the_stock_is_required()
+    {
+        $data = $this->getData();
+        unset($data['stock']);
+
+        $response = $this->makeRequest($this->product->id, $data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('stock');
+        $this->assertEquals(count($responseData['errors']), 1);
+    }
+
+    /** @test */
+    public function the_price_without_discount_is_required()
+    {
+        $data = $this->getData();
+        unset($data['price_without_discount']);
+
+        $response = $this->makeRequest($this->product->id, $data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('price_without_discount');
+        $this->assertEquals(count($responseData['errors']), 2);
+    }
+
+    /** @test */
+    public function the_price_with_discount_is_required()
+    {
+        $data = $this->getData();
+        unset($data['price_with_discount']);
+
+        $response = $this->makeRequest($this->product->id, $data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('price_with_discount');
+        $this->assertEquals(count($responseData['errors']), 1);
+    }
+
+    /** @test */
     public function can_be_updated()
     {
         $data = $this->getData();
@@ -69,6 +128,7 @@ class UpdateProductTest extends TestCase
 
         $this->assertEquals($data['name'], $product->name);
         $this->assertEquals($data['image'], $product->image);
+        $this->assertEquals($data['stock'], $product->stock);
         $this->assertEquals($data['price_without_discount'], $product->price_without_discount);
         $this->assertEquals($data['price_with_discount'], $product->price_with_discount);
         $this->assertEquals($product->price_without_discount > $product->price_with_discount, true);
@@ -89,6 +149,7 @@ class UpdateProductTest extends TestCase
 
         return [
             'store_id' => $this->store->id,
+            'stock' => rand(0, 10),
             'name' => $this->faker->colorName() . ' product',
             'image' => $this->faker->url(),
             'price_without_discount' => $price,

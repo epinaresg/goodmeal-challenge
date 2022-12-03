@@ -25,6 +25,7 @@ class CreateStoreRequest extends FormRequest
     {
         return [
             'logo' => 'required',
+            'background' => 'required',
             'name' => 'required',
             'address' => 'required',
             'take_out' => 'required|numeric|in:0,1',

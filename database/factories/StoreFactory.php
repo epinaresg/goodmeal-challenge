@@ -20,6 +20,7 @@ class StoreFactory extends Factory
         $name = fake()->company();
         return [
             'logo' => fake()->url(),
+            'background' => fake()->url(),
             'name' => $name,
             'slug' => Str::slug($name, '-'),
             'address' => fake()->address(),
