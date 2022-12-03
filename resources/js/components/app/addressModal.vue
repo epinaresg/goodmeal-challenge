@@ -1,3 +1,39 @@
+<script>
+import axios from "axios";
+
+export default {
+    data() {
+        return {
+            address: "",
+            latitude: "",
+            longitude: "",
+        };
+    },
+    mounted() {},
+    methods: {
+        saveAddress() {
+            axios
+                .post("/addresses", {
+                    address: this.address,
+                    latitude: this.latitude,
+                    longitude: this.longitude,
+                })
+                .then((response) => {
+                    this.$parent.getAddress();
+                    this.address = "";
+                    this.latitude = "";
+                    this.longitude = "";
+                    $("#btnClose").click();
+                })
+                .catch((error) => {
+                    console.log(error);
+                    alert(error.response.data.message);
+                });
+        },
+    },
+};
+</script>
+
 <template>
     <div
         class="modal fade"
@@ -14,6 +50,7 @@
                         Ingrese su dirección
                     </h5>
                     <button
+                        id="btnClose"
                         type="button"
                         class="close"
                         data-dismiss="modal"
@@ -25,21 +62,25 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="address">Dirección</label>
+                            <label for="address">Dirección (*)</label>
                             <input
                                 class="form-control"
                                 id="address"
+                                v-model="address"
                                 placeholder="Calle Cristobal Colon Mz.A Lt ..."
+                                required
                             />
                         </div>
                         <hr />
                         <div class="form-group">
-                            <label for="latitude">Latitud</label>
+                            <label for="latitude">Latitud (*)</label>
                             <input
                                 class="form-control"
                                 id="latitude"
+                                v-model="latitude"
                                 aria-describedby="latitudeHelp"
                                 placeholder="xx.xxxx"
+                                required
                             />
                             <small
                                 id="latitudeHelp"
@@ -48,12 +89,14 @@
                             >
                         </div>
                         <div class="form-group">
-                            <label for="latitude">Longitud</label>
+                            <label for="latitude">Longitud (*)</label>
                             <input
                                 class="form-control"
                                 id="longitude"
+                                v-model="longitude"
                                 aria-describedby="latitudeHelp"
                                 placeholder="-xx.xxxx"
+                                required
                             />
                             <small
                                 id="longitudeHelp"
@@ -71,7 +114,11 @@
                     >
                         Cancelar
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        v-on:click="saveAddress"
+                    >
                         Guardar
                     </button>
                 </div>

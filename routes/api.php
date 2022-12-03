@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\App\GetDefaultAddressController;
 use App\Http\Controllers\Api\App\ListStoresGroupByStockController;
+use App\Http\Controllers\Api\App\SaveAddressController;
 use App\Http\Controllers\Api\App\ShowStoreController as AppShowStoreController;
 use App\Http\Controllers\Api\Backoffice\Category\CreateCategoryController;
 use App\Http\Controllers\Api\Backoffice\Category\DeleteCategoryController;
@@ -56,4 +58,8 @@ Route::group(['middleware' => 'api'], function () {
 
     Route::get('/stores', ListStoresGroupByStockController::class);
     Route::get('/stores/{store}', AppShowStoreController::class);
+
+
+    Route::get('/addresses', GetDefaultAddressController::class);
+    Route::post('/addresses', SaveAddressController::class);
 });

@@ -11,18 +11,42 @@ export default {
         return {
             storesWithStock: [],
             storesWithoutStock: [],
+            address: "--------",
+            latitude: "",
+            longitude: "",
         };
     },
     mounted() {
-        this.listStores();
+        this.getAddress();
     },
     methods: {
         listStores() {
             axios
-                .get("/stores")
+                .get(
+                    "/stores?latitude=" +
+                        this.latitude +
+                        "&longitude=" +
+                        this.longitude
+                )
                 .then((response) => {
                     this.storesWithStock = response.data.with_stock;
                     this.storesWithoutStock = response.data.without_stock;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        getAddress() {
+            axios
+                .get("/addresses")
+                .then((response) => {
+                    if (response.data.address) {
+                        this.address = response.data.address;
+                        this.latitude = response.data.latitude;
+                        this.longitude = response.data.longitude;
+                    } else this.address = "Sin dirección";
+
+                    this.listStores();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -40,7 +64,7 @@ export default {
 
 <template>
     <div class="container-fluid">
-        <AddressBar />
+        <AddressBar :address="address" />
         <AddressModal />
 
         <div class="tabsContainer">
