@@ -19,9 +19,10 @@ class ProductFactory extends Factory
         $price = rand(10000, 44000);
         return [
             'name' => fake()->colorName() . ' product',
-            'image' => fake()->url(),
+            'image' => 'https://picsum.photos/200',
             'price_without_discount' => $price,
             'price_with_discount' => rand(1000, $price - 1000),
+            'stock' => rand(0, 99)
         ];
     }
 }

@@ -15,6 +15,8 @@ class Store extends Model
 
     protected $fillable = [
         'logo',
+        'background',
+
         'name',
         'address',
 
@@ -26,7 +28,10 @@ class Store extends Model
 
         'products_with_stock',
         'price_with_discount',
-        'price_without_discount'
+        'price_without_discount',
+
+        'opening_hours',
+        'kind_of_attention'
     ];
 
     public function schedules()
