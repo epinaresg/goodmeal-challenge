@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Categories;
 
-use App\Models\Category;
 use App\Models\Store;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\TestResponse;

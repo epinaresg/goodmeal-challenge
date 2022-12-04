@@ -14,6 +14,8 @@ class StoreSeeder extends Seeder
      */
     public function run()
     {
+        Store::factory()->times(rand(20, 100))->create();
+
         Store::create([
             'logo' => 'https://img.mesa247.pe/archivos/restaurant-costazul-seafood-eirl/costazul-seafood-logo.jpg',
             'background' => 'https://img.mesa247.pe/archivos/w-bg-costazul-seafood-1668121740.jpg',
@@ -69,8 +71,5 @@ class StoreSeeder extends Seeder
             'longitude' => '-77.0350441',
             'kind_of_attention' => 'Delivery'
         ]);
-
-
-        Store::factory()->times(20)->create();
     }
 }

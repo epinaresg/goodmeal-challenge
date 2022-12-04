@@ -17,7 +17,7 @@ class ListStoresGroupByStockUseCase
 
     public function __invoke(?string $addressId): array
     {
-        $stores = $this->storeRepository->get();
+        $stores = $this->storeRepository->get()->sortByDesc('id');
 
         if ($addressId) {
             $address = $this->addressRespository->byId($addressId);
