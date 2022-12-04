@@ -11,7 +11,11 @@ export default {
 </script>
 
 <template>
-    <TitleBar :title="'Ordenes'" :backUrl="'/'" />
+    <div class="container-fluid h-100">
+        <TitleBar :title="'Ordenes'" :backUrl="'/'" />
 
-    <HomeBottomMenu :active="'orders'" />
+        <div class="orderContainer"></div>
+
+        <HomeBottomMenu :active="'orders'" />
+    </div>
 </template>

@@ -66,28 +66,30 @@ export default {
 </script>
 
 <template>
-    <TitleBar
-        :title="'Carrito de compra'"
-        :backUrl="'/store/' + this.$route.params.storeId"
-    />
-    <StoreDetail :store="store" />
+    <div class="container-fluid h-100">
+        <TitleBar
+            :title="'Carrito de compra'"
+            :backUrl="'/store/' + this.$route.params.storeId"
+        />
+        <StoreDetail :store="store" />
 
-    <hr />
+        <hr />
 
-    <CartForm :form="form" :cart="cart" />
+        <CartForm :form="form" :cart="cart" :store="store" />
 
-    <hr />
+        <hr />
 
-    <CartDetail :form="form" :cart="cart" />
+        <CartDetail :form="form" :cart="cart" />
 
-    <hr />
-    <div class="px-3">
-        <button
-            v-on:click="closeCart"
-            type="button"
-            class="btn btn-primary btn-block mb-2"
-        >
-            Registrar orden
-        </button>
+        <hr />
+        <div class="px-3">
+            <button
+                v-on:click="closeCart"
+                type="button"
+                class="btn btn-primary btn-block mb-2"
+            >
+                Registrar orden
+            </button>
+        </div>
     </div>
 </template>

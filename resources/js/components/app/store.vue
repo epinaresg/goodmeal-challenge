@@ -53,25 +53,27 @@ export default {
 </script>
 
 <template>
-    <NoStockModal :store="store" />
+    <div class="container-fluid h-100">
+        <NoStockModal :store="store" />
 
-    <StoreBar :store="store" :cart="cart" />
+        <StoreBar :store="store" :cart="cart" />
 
-    <StoreBackground :store="store" />
+        <StoreBackground :store="store" />
 
-    <StoreDetail :store="store" />
+        <StoreDetail :store="store" />
 
-    <ListProducts :store="store" :products="products" />
+        <ListProducts :store="store" :products="products" />
 
-    <div class="px-3">
-        <router-link :to="'/cart/' + store.id">
-            <button
-                type="button"
-                class="btn btn-primary btn-block mb-2"
-                :disabled="cart.qty_products > 0 ? false : true"
-            >
-                Comprar
-            </button>
-        </router-link>
+        <div class="px-3">
+            <router-link :to="'/cart/' + store.id">
+                <button
+                    type="button"
+                    class="btn btn-primary btn-block mb-2"
+                    :disabled="cart.qty_products > 0 ? false : true"
+                >
+                    Comprar
+                </button>
+            </router-link>
+        </div>
     </div>
 </template>

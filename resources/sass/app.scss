@@ -89,7 +89,7 @@ html {
 }
 
 .itemsContainer {
-    height: calc(100% - 228px);
+    height: calc(100% - 220px);
     overflow-y: auto;
     margin-top: 10px;
     .item {
@@ -345,4 +345,8 @@ html {
 
 .successMessageContainer {
     height: calc(100% - 200px);
+}
+
+.orderContainer {
+    height: calc(100% - 165px);
 }

@@ -11,7 +11,9 @@ export default {
 </script>
 
 <template>
-    <TitleBar :title="'Perfil'" :backUrl="'/'" />
+    <div class="container-fluid h-100">
+        <TitleBar :title="'Perfil'" :backUrl="'/'" />
 
-    <HomeBottomMenu :active="'profile'" />
+        <HomeBottomMenu :active="'profile'" />
+    </div>
 </template>

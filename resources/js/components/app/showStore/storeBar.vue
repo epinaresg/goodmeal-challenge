@@ -4,7 +4,10 @@ export default {
 
     methods: {
         goTo() {
-            if (this.store.products_with_stock > 0)
+            if (
+                this.store.products_with_stock > 0 &&
+                this.cart.qty_products > 0
+            )
                 this.$router.push("/cart/" + this.store.id);
         },
     },
