@@ -32,26 +32,30 @@ class ProductSeeder extends Seeder
                     $data['stock'] = 0;
                 }
 
-                $product = Product::factory()->create($data);
-
                 $categories = $store->categories->shuffle()->slice(5);
 
-                foreach ($categories as $category) {
-                    ProductCategory::create([
-                        'store_id' => $store->id,
-                        'product_id' => $product->id,
-                        'category_id' => $category->id
-                    ]);
+                if ($categories->count() > 0) {
+                    $product = Product::factory()->create($data);
+
+
+                    foreach ($categories as $category) {
+                        ProductCategory::create([
+                            'store_id' => $store->id,
+                            'product_id' => $product->id,
+                            'category_id' => $category->id
+                        ]);
+                    }
                 }
             }
+
 
             $products = $store->products;
 
             $priceWithDiscount = $products->min('price_with_discount');
             $priceWithouDiscount = $products->min('price_without_discount');
 
-            $store->price_with_discount = $priceWithDiscount;
-            $store->price_without_discount = $priceWithouDiscount;
+            $store->price_with_discount = ($priceWithDiscount ? $priceWithDiscount : 0);
+            $store->price_without_discount = ($priceWithouDiscount ? $priceWithouDiscount : 0);
 
 
             $productsWithStock = $products->where('stock', '>', 0)->count();
