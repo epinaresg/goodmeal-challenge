@@ -1,8 +1,8 @@
 <script>
-import AddressModal from "@/components/app/addressModal.vue";
-import AddressBar from "@/components/app/addressBar.vue";
+import AddressModal from "@/components/app/addressBar/addressModal.vue";
+import AddressBar from "@/components/app/addressBar/addressBar.vue";
+import ListStore from "@/components/app/listStores/listStore.vue";
 import HomeBottomMenu from "@/components/app/homeBottomMenu.vue";
-import ListStore from "@/components/app/listStore.vue";
 
 import axios from "axios";
 
