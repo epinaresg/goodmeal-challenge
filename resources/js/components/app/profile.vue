@@ -14,7 +14,9 @@ export default {
             <span class="title fs-16"> Perfil </span>
         </div>
 
-        <div class="orderContainer"></div>
+        <div class="orderContainer">
+            <div class="text-center fs-18">Coming soon!</div>
+        </div>
 
         <HomeBottomMenu :active="'profile'" />
     </div>
