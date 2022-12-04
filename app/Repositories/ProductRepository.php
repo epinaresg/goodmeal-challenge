@@ -16,7 +16,7 @@ class ProductRepository
 
     public function paginate(Store $store): LengthAwarePaginator
     {
-        return $store->products()->paginate();
+        return $store->products()->orderBy('id', 'DESC')->paginate();
     }
 
     public function create(Store $store, array $data): Product

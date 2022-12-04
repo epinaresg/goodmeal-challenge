@@ -21,7 +21,7 @@ class StoreRespository
 
     public function paginate(): LengthAwarePaginator
     {
-        return Store::paginate();
+        return Store::orderBy('id', 'DESC')->paginate();
     }
 
     public function create(array $data): Store

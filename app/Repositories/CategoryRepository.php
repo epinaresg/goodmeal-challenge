@@ -16,7 +16,7 @@ class CategoryRepository
 
     public function paginate(Store $store): LengthAwarePaginator
     {
-        return $store->categories()->paginate();
+        return $store->categories()->orderBy('id', 'DESC')->paginate();
     }
 
     public function create(Store $store, array $data): Category
