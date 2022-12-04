@@ -22,7 +22,6 @@ class CalculateStoreDistanceUseCase
         $calculateStoresData = ($address->distances_data) ? json_decode($address->distances_data) : [];
 
         $stores = $this->storeRepository->getWhereIdNotIn($calculateStores);
-
         foreach ($stores as $store) {
             $calculateStores[] = $store->id;
 

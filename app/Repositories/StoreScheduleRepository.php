@@ -4,9 +4,15 @@ namespace App\Repositories;
 
 use App\Models\Store;
 use App\Models\StoreSchedule;
+use Illuminate\Database\Eloquent\Collection;
 
 class StoreScheduleRepository
 {
+    public function get(Store $store): Collection
+    {
+        return $store->schedules()->get();
+    }
+
     public function create(Store $store, array $data): StoreSchedule
     {
         return $store->schedules()->create($data);
