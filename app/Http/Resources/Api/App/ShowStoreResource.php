@@ -28,6 +28,8 @@ class ShowStoreResource extends JsonResource
             "take_out" => $this->take_out,
             "rating" => $this->rating,
 
+            "products_with_stock" => $this->products_with_stock,
+
             "schedules" => ShowStoreSchedulesResource::collection($this->schedules)
         ];
     }

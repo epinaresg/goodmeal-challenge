@@ -2,7 +2,7 @@
 
 namespace App\UseCases\Api\App;
 
-use App\Repositories\AddressRespository;
+use App\Repositories\AddressRepository;
 use App\Repositories\StoreRespository;
 
 class ListStoresGroupByStockUseCase
@@ -12,7 +12,7 @@ class ListStoresGroupByStockUseCase
     public function __construct()
     {
         $this->storeRepository = new StoreRespository();
-        $this->addressRespository = new AddressRespository();
+        $this->addressRespository = new AddressRepository();
     }
 
     public function __invoke(?string $addressId): array

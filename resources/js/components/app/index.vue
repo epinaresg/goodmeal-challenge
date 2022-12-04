@@ -1,5 +1,4 @@
 <script>
-import AddressModal from "@/components/app/addressBar/addressModal.vue";
 import AddressBar from "@/components/app/addressBar/addressBar.vue";
 import ListStore from "@/components/app/listStores/listStore.vue";
 import HomeBottomMenu from "@/components/app/homeBottomMenu.vue";
@@ -41,7 +40,9 @@ export default {
                         this.address = response.data.address;
                         this.latitude = response.data.latitude;
                         this.longitude = response.data.longitude;
-                    } else this.address = "Sin dirección";
+                    } else
+                        this.address =
+                            "Click aquí para registrar una dirección";
 
                     this.listStores();
                 })
@@ -51,7 +52,6 @@ export default {
         },
     },
     components: {
-        AddressModal,
         AddressBar,
         HomeBottomMenu,
         ListStore,
@@ -62,7 +62,6 @@ export default {
 <template>
     <div class="container-fluid h-100">
         <AddressBar :address="address" />
-        <AddressModal />
 
         <ListStore
             :storesWithStock="storesWithStock"

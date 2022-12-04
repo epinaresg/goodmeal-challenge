@@ -4,8 +4,8 @@ namespace App\UseCases\Api\Backoffice\Category;
 
 use App\Models\Category;
 use App\Models\Store;
-use App\Repositories\CategoryRespository;
-use App\Repositories\ProductCategoryRespository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductCategoryRepository;
 use Illuminate\Http\JsonResponse;
 
 class DeleteCategoryUseCase
@@ -14,8 +14,8 @@ class DeleteCategoryUseCase
     private $productCategoryRepository;
     public function __construct()
     {
-        $this->categoryRepository = new CategoryRespository();
-        $this->productCategoryRepository = new ProductCategoryRespository();
+        $this->categoryRepository = new CategoryRepository();
+        $this->productCategoryRepository = new ProductCategoryRepository();
     }
 
     public function __invoke(Store $store, Category $category): void

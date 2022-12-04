@@ -4,7 +4,7 @@ namespace App\UseCases\Api\Backoffice\Product;
 
 use App\Models\Product;
 use App\Models\Store;
-use App\Repositories\ProductRespository;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\JsonResponse;
 
 class DeleteProductUseCase
@@ -12,7 +12,7 @@ class DeleteProductUseCase
     private $repository;
     public function __construct()
     {
-        $this->repository = new ProductRespository();
+        $this->repository = new ProductRepository();
     }
 
     public function __invoke(Store $store, Product $product): void

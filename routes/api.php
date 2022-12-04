@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\App\AddProductToCartController;
+use App\Http\Controllers\Api\App\CloseCartController;
+use App\Http\Controllers\Api\App\GetCartController;
 use App\Http\Controllers\Api\App\GetDefaultAddressController;
 use App\Http\Controllers\Api\App\ListStoresGroupByStockController;
 use App\Http\Controllers\Api\App\SaveAddressController;
@@ -62,4 +65,9 @@ Route::group(['middleware' => 'api'], function () {
 
     Route::get('/addresses', GetDefaultAddressController::class);
     Route::post('/addresses', SaveAddressController::class);
+
+
+    Route::get('/stores/{store}/carts', GetCartController::class);
+    Route::post('/stores/{store}/carts', AddProductToCartController::class);
+    Route::post('/stores/{store}/carts/close', CloseCartController::class);
 });

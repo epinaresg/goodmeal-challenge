@@ -3,8 +3,8 @@
 namespace App\UseCases\Api\App;
 
 use App\Models\Store;
-use App\Repositories\CategoryRespository;
-use App\Repositories\ProductRespository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 
 class ListProductsGroupByCategory
 {
@@ -12,8 +12,8 @@ class ListProductsGroupByCategory
     private $categoryRepository;
     public function __construct()
     {
-        $this->productRepository = new ProductRespository();
-        $this->categoryRepository = new CategoryRespository();
+        $this->productRepository = new ProductRepository();
+        $this->categoryRepository = new CategoryRepository();
     }
 
     public function __invoke(Store $store): array

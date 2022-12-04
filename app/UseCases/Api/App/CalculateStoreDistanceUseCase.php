@@ -3,7 +3,7 @@
 namespace App\UseCases\Api\App;
 
 use App\Models\Address;
-use App\Repositories\AddressRespository;
+use App\Repositories\AddressRepository;
 use App\Repositories\StoreRespository;
 
 class CalculateStoreDistanceUseCase
@@ -13,7 +13,7 @@ class CalculateStoreDistanceUseCase
     public function __construct()
     {
         $this->storeRepository = new StoreRespository();
-        $this->addressRepository = new AddressRespository();
+        $this->addressRepository = new AddressRepository();
     }
 
     public function __invoke(Address $address): void

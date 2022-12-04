@@ -3,14 +3,14 @@
 namespace App\UseCases\Api\Backoffice\StoreSchedule;
 
 use App\Models\Store;
-use App\Repositories\StoreScheduleRespository;
+use App\Repositories\StoreScheduleRepository;
 
 class DeleteStoreScheduleByStoreAndTypeUseCase
 {
     private $repository;
     public function __construct()
     {
-        $this->repository = new StoreScheduleRespository();
+        $this->repository = new StoreScheduleRepository();
     }
 
     public function __invoke(Store $store, $type): void

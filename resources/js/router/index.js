@@ -6,7 +6,10 @@ import notFound from "@/components/app/notFound.vue";
 import orders from "@/components/app/orders.vue";
 import profile from "@/components/app/profile.vue";
 
-import showStore from "@/components/app/showStore.vue";
+import cart from "@/components/app/cart.vue";
+import cartSuccess from "@/components/app/cartSuccess.vue";
+
+import store from "@/components/app/store.vue";
 
 const routes = [
     {
@@ -15,7 +18,7 @@ const routes = [
     },
     {
         path: "/store/:storeId",
-        component: showStore,
+        component: store,
     },
     {
         path: "/orders",
@@ -24,6 +27,14 @@ const routes = [
     {
         path: "/profile",
         component: profile,
+    },
+    {
+        path: "/cart/close/success",
+        component: cartSuccess,
+    },
+    {
+        path: "/cart/:storeId",
+        component: cart,
     },
     {
         path: "/:pathMatch(.*)*",

@@ -3,8 +3,8 @@
 namespace App\UseCases\Api\Backoffice\ProductCategory;
 
 use App\Models\Product;
-use App\Repositories\CategoryRespository;
-use App\Repositories\ProductCategoryRespository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProductCategoryRepository;
 use Illuminate\Http\JsonResponse;
 
 class CreateProductCategoryUseCase
@@ -13,8 +13,8 @@ class CreateProductCategoryUseCase
     private $categoryRepository;
     public function __construct()
     {
-        $this->productCategoryRepository = new ProductCategoryRespository();
-        $this->categoryRepository = new CategoryRespository();
+        $this->productCategoryRepository = new ProductCategoryRepository();
+        $this->categoryRepository = new CategoryRepository();
     }
 
     public function __invoke(Product $product, array $data): void

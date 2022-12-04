@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Address;
 
-class AddressRespository
+class AddressRepository
 {
     public function create(array $data): Address
     {

@@ -47,10 +47,15 @@ html {
     width: 22px;
 }
 
+.hide {
+    display: none;
+}
+
 .addressBar {
     background-color: $white-color;
     width: 100%;
     padding: 0 15px;
+    cursor: pointer;
     .addressText {
         text-overflow: ellipsis;
         overflow: hidden;
@@ -200,6 +205,23 @@ html {
     .title {
         font-weight: bold;
     }
+    .qtyProducts {
+        font-size: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: $primary-color;
+        color: $white-color;
+        text-align: center;
+        display: block;
+        padding: 3px 2px;
+        position: absolute;
+        top: 15px;
+        right: 10px;
+    }
+    .btnCart {
+        cursor: pointer;
+    }
 }
 
 .storeBackground {
@@ -303,4 +325,24 @@ html {
 
 .btn-primary {
     background-color: $primary-color !important;
+}
+
+.titleHeaderBar {
+    height: 72px;
+    text-align: center;
+    .title {
+        font-weight: bold;
+    }
+    .backButton {
+        position: absolute;
+        left: 0;
+    }
+}
+
+.cartDetailContainer {
+    height: calc(100% - 400px);
+}
+
+.successMessageContainer {
+    height: calc(100% - 200px);
 }

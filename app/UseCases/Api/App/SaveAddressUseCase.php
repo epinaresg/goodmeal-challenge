@@ -3,14 +3,14 @@
 namespace App\UseCases\Api\App;
 
 use App\Models\Store;
-use App\Repositories\AddressRespository;
+use App\Repositories\AddressRepository;
 
 class SaveAddressUseCase
 {
     private $repository;
     public function __construct()
     {
-        $this->repository = new AddressRespository();
+        $this->repository = new AddressRepository();
     }
 
     public function __invoke(array $data): void

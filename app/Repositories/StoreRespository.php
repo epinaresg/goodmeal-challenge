@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Store;
+use App\Models\StoreSchedule;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -32,6 +33,11 @@ class StoreRespository
     {
         $store->update($data);
         return $store;
+    }
+
+    public function schedulesByType(Store $store, string $type): ?StoreSchedule
+    {
+        return $store->schedules->where('type', $type)->first();
     }
 
     public function delete(Store $store): bool

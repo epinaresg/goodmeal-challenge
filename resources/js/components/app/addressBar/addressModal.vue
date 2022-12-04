@@ -2,6 +2,8 @@
 import axios from "axios";
 
 export default {
+    props: ["force"],
+
     data() {
         return {
             address: "",
@@ -19,11 +21,13 @@ export default {
                     longitude: this.longitude,
                 })
                 .then((response) => {
-                    this.$parent.getAddress();
+                    this.$parent.$parent.getAddress();
                     this.address = "";
                     this.latitude = "";
                     this.longitude = "";
+
                     $("#btnClose").click();
+                    console.log("Close");
                 })
                 .catch((error) => {
                     console.log(error);
@@ -50,6 +54,7 @@ export default {
                         Ingrese su dirección
                     </h5>
                     <button
+                        :class="force ? 'hide' : ''"
                         id="btnClose"
                         type="button"
                         class="close"
@@ -85,7 +90,7 @@ export default {
                             <small
                                 id="latitudeHelp"
                                 class="form-text text-muted"
-                                >Dato para calculo de distancia.</small
+                                >Dato para cálculo de distancia.</small
                             >
                         </div>
                         <div class="form-group">
@@ -101,13 +106,14 @@ export default {
                             <small
                                 id="longitudeHelp"
                                 class="form-text text-muted"
-                                >Dato para calculo de distancia.</small
+                                >Dato para cálculo de distancia.</small
                             >
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button
+                        v-if="!force"
                         type="button"
                         class="btn btn-secondary"
                         data-dismiss="modal"

@@ -2,7 +2,7 @@
 import ProductItem from "@/components/app/showStore/productItem.vue";
 
 export default {
-    props: ["products"],
+    props: ["products", "store"],
     components: {
         ProductItem,
     },
@@ -50,7 +50,7 @@ export default {
                             v-for="item in product.items"
                             :key="item.id"
                         >
-                            <ProductItem :item="item" />
+                            <ProductItem :store="store" :item="item" />
                         </div>
                     </div>
                 </div>

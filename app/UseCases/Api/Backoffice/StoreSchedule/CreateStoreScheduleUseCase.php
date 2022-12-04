@@ -3,7 +3,7 @@
 namespace App\UseCases\Api\Backoffice\StoreSchedule;
 
 use App\Models\Store;
-use App\Repositories\StoreScheduleRespository;
+use App\Repositories\StoreScheduleRepository;
 use Illuminate\Http\JsonResponse;
 
 class CreateStoreScheduleUseCase
@@ -11,7 +11,7 @@ class CreateStoreScheduleUseCase
     private $repository;
     public function __construct()
     {
-        $this->repository = new StoreScheduleRespository();
+        $this->repository = new StoreScheduleRepository();
     }
 
     public function __invoke(Store $store, $type, array $data): void

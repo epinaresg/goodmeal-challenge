@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Store;
 use App\Models\StoreSchedule;
 
-class StoreScheduleRespository
+class StoreScheduleRepository
 {
     public function create(Store $store, array $data): StoreSchedule
     {

@@ -4,7 +4,7 @@ namespace App\UseCases\Api\Backoffice\Category;
 
 use App\Models\Category;
 use App\Models\Store;
-use App\Repositories\CategoryRespository;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\JsonResponse;
 
 class CreateCategoryUseCase
@@ -12,7 +12,7 @@ class CreateCategoryUseCase
     private $repository;
     public function __construct()
     {
-        $this->repository = new CategoryRespository();
+        $this->repository = new CategoryRepository();
     }
 
     public function __invoke(Store $store, array $data): Category

@@ -7,7 +7,7 @@ use App\Models\Store;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
-class CategoryRespository
+class CategoryRepository
 {
     public function get(Store $store): Collection
     {

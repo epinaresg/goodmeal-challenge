@@ -1,6 +1,13 @@
 <script>
 export default {
-    props: ["store"],
+    props: ["store", "cart"],
+
+    methods: {
+        goTo() {
+            if (this.store.products_with_stock > 0)
+                this.$router.push("/cart/" + this.store.id);
+        },
+    },
 };
 </script>
 
@@ -14,8 +21,13 @@ export default {
         <span class="title fs-16">
             {{ store.name }}
         </span>
-        <span class="icon pr-4 float-right fs-18">
-            <i class="fa-solid fa-cart-shopping"></i>
-        </span>
+        <a class="btnCart" v-on:click="goTo">
+            <span class="icon pr-4 float-right fs-18 position-relative">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span v-if="cart.qty_products" class="qtyProducts">
+                    {{ cart.qty_products }}
+                </span>
+            </span>
+        </a>
     </div>
 </template>
