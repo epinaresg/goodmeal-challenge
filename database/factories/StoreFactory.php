@@ -19,9 +19,19 @@ class StoreFactory extends Factory
     {
         $name = fake()->company();
 
+        $delivery = rand(0, 1);
+        $takeOut = ($delivery == 0 ? 1 : rand(0, 1));
+
+        $kindOfAttention = 'Retiro o delivery';
+        if ($delivery == 1 && $takeOut == 0) {
+            $kindOfAttention = 'Delivery';
+        } elseif ($delivery == 0 && $takeOut == 1) {
+            $kindOfAttention = 'Retiro';
+        }
+
         return [
-            'logo' => 'https://picsum.photos/200',
-            'background' => 'https://picsum.photos/1920/500',
+            'logo' => 'https://picsum.photos/id/' . rand(1, 500). '/200',
+            'background' => 'https://picsum.photos/id/' . rand(1, 500). '/1920/500',
             'name' => $name,
             'slug' => Str::slug($name, '-'),
             'products_with_stock' => rand(0, 1),
@@ -29,8 +39,9 @@ class StoreFactory extends Factory
             'latitude' => fake()->latitude(),
             'longitude' => fake()->longitude(),
             'rating' => rand(1, 5),
-            'delivery' => rand(0, 1),
-            'take_out' => rand(0, 1),
+            'delivery' => $delivery,
+            'take_out' => $takeOut,
+            'kind_of_attention' => $kindOfAttention
         ];
     }
 }

@@ -47,11 +47,12 @@ class CloseCartUseCase
                 throw new \Exception('No cuenta con una dirección registrada.', JsonResponse::HTTP_BAD_REQUEST);
             }
 
+            $closeData['total'] = $order->total_with_delivery;
             $closeData['customer_address'] = $address->address;
             $closeData['state'] = 'Por entregar';
         } else {
             $closeData['total_delivery'] = 0;
-            $closeData['total_with_delivery'] = $order->total;
+            $closeData['total_with_delivery'] = 0;
             $closeData['state'] = 'Por recoger';
         }
 

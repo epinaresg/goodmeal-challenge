@@ -1,6 +1,6 @@
 <script>
 import AddressBar from "@/components/app/addressBar/addressBar.vue";
-import ListStore from "@/components/app/listStores/listStore.vue";
+import ListStore from "@/components/app/stores/listStore.vue";
 import HomeBottomMenu from "@/components/app/homeBottomMenu.vue";
 
 import axios from "axios";
@@ -20,7 +20,7 @@ export default {
         this.getAddress();
     },
     methods: {
-        listStores() {
+        stores() {
             axios
                 .get("/stores?address_id=" + this.address_id)
                 .then((response) => {
@@ -44,7 +44,7 @@ export default {
                         this.address =
                             "Click aquí para registrar una dirección";
 
-                    this.listStores();
+                    this.stores();
                 })
                 .catch((error) => {
                     console.log(error);

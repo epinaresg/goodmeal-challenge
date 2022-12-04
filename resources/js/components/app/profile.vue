@@ -1,18 +1,20 @@
 <script>
 import HomeBottomMenu from "@/components/app/homeBottomMenu.vue";
-import TitleBar from "@/components/app/titleBar.vue";
 
 export default {
     components: {
         HomeBottomMenu,
-        TitleBar,
     },
 };
 </script>
 
 <template>
     <div class="container-fluid h-100">
-        <TitleBar :title="'Perfil'" :backUrl="'/'" />
+        <div class="titleHeaderBar py-4">
+            <span class="title fs-16"> Perfil </span>
+        </div>
+
+        <div class="orderContainer"></div>
 
         <HomeBottomMenu :active="'profile'" />
     </div>

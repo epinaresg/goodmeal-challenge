@@ -20,7 +20,7 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->colorName() . ' product',
             'stock' => rand(0, 10),
-            'image' => 'https://picsum.photos/200',
+            'image' => 'https://picsum.photos/id/' . rand(1, 500). '/200',
             'price_without_discount' => $price,
             'price_with_discount' => rand(1000, $price - 1000),
             'stock' => rand(0, 99)

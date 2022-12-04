@@ -340,7 +340,7 @@ html {
 }
 
 .cartDetailContainer {
-    height: calc(100% - 400px);
+    height: calc(100% - 414px);
 }
 
 .successMessageContainer {
@@ -349,4 +349,24 @@ html {
 
 .orderContainer {
     height: calc(100% - 165px);
+    .orderItem {
+        border-radius: 20px;
+        box-shadow: 0 0 7px 2px rgb(0 0 0 / 10%);
+        .orderState {
+            color: $white-color;
+            background-color: $primary-color;
+            border-radius: 0 0 15px 15px;
+            right: 20px;
+            top: 0;
+            padding: 3px 20px;
+        }
+        .goToOrder {
+            font-size: 25px;
+            right: 25px;
+            top: 80px;
+            i {
+                color: $grey-color;
+            }
+        }
+    }
 }

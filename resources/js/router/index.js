@@ -4,6 +4,8 @@ import appIndex from "@/components/app/index.vue";
 import notFound from "@/components/app/notFound.vue";
 
 import orders from "@/components/app/orders.vue";
+import showOrder from "@/components/app/showOrder.vue";
+
 import profile from "@/components/app/profile.vue";
 
 import cart from "@/components/app/cart.vue";
@@ -23,6 +25,10 @@ const routes = [
     {
         path: "/orders",
         component: orders,
+    },
+    {
+        path: "/orders/:orderId",
+        component: showOrder,
     },
     {
         path: "/profile",

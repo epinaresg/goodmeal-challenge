@@ -1,5 +1,5 @@
 <script>
-import StoreItem from "@/components/app/listStores/storeItem.vue";
+import StoreItem from "@/components/app/stores/storeItem.vue";
 
 export default {
     props: ["storesWithStock", "storesWithoutStock"],

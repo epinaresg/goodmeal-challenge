@@ -71,6 +71,6 @@ class StoreSeeder extends Seeder
         ]);
 
 
-        //Store::factory()->times(50)->create();
+        Store::factory()->times(20)->create();
     }
 }
