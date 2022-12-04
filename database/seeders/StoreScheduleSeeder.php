@@ -20,11 +20,11 @@ class StoreScheduleSeeder extends Seeder
         foreach ($stores as $store) {
             $minStart = 0;
             $maxEnd = 0;
-            if ($store->take_out == 1) {
+            if ($store->delivery == 1) {
                 $start = rand(9, 14);
                 $end = rand($start + 1, 23);
                 StoreSchedule::factory()->create([
-                    'type' => 'take_out',
+                    'type' => 'delivery',
                     'store_id' => $store->id,
                     'start_hour' => $start . ':00',
                     'end_hour' => $end . ':00',
@@ -34,7 +34,7 @@ class StoreScheduleSeeder extends Seeder
                 $maxEnd = $end;
             }
 
-            if ($store->delivery == 1) {
+            if ($store->take_out == 1) {
                 $start = rand(9, 14);
                 $end = rand($start + 1, 23);
 
@@ -47,7 +47,7 @@ class StoreScheduleSeeder extends Seeder
                 }
 
                 StoreSchedule::factory()->create([
-                    'type' => 'delivery',
+                    'type' => 'take_out',
                     'store_id' => $store->id,
                     'start_hour' => $start . ':00',
                     'end_hour' => $end . ':00',
