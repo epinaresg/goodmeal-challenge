@@ -18,8 +18,9 @@ class ShowStoreProductItemsResource extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "image" => $this->image,
-            "price_with_discount" => $this->price_with_discount,
-            "price_without_discount" => $this->price_without_discount,
+
+            "price_with_discount" => number_format($this->price_with_discount, 0, '', '.'),
+            "price_without_discount" => number_format($this->price_without_discount, 0, '', '.'),
         ];
     }
 }

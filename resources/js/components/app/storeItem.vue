@@ -43,14 +43,18 @@ export default {
             <div class="metaContainer">
                 <div class="row">
                     <div class="col-8">
-                        <span class="walkIcon"
+                        <span v-if="item.distance_walk" class="walkIcon"
                             ><i class="fa-solid fa-person-walking"></i
                         ></span>
-                        <span class="walkText">45 min</span>
-                        <span class="distanceIcon">
+                        <span v-if="item.distance_walk" class="walkText">{{
+                            item.distance_walk
+                        }}</span>
+                        <span v-if="item.distance_km" class="distanceIcon">
                             <i class="fa-solid fa-location-dot"></i>
                         </span>
-                        <span class="distanceText">3,84 km</span>
+                        <span v-if="item.distance_km" class="distanceText">{{
+                            item.distance_km
+                        }}</span>
                     </div>
 
                     <div class="col-4 text-right">

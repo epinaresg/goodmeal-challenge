@@ -22,6 +22,9 @@ class Store extends Model
 
         'slug',
 
+        'latitude',
+        'longitude',
+
         'delivery',
         'take_out',
         'rating',

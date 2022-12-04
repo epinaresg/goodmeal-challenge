@@ -2,6 +2,7 @@
 
 namespace App\UseCases\Api\App;
 
+use App\Models\Store;
 use App\Repositories\AddressRespository;
 
 class SaveAddressUseCase

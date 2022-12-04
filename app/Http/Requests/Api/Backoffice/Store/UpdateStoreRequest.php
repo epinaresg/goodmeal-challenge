@@ -28,6 +28,8 @@ class UpdateStoreRequest extends FormRequest
             'background' => 'required',
             'name' => 'required',
             'address' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'take_out' => 'required|numeric|in:0,1',
             'delivery' => 'required|numeric|in:0,1',
             'rating' => 'required|numeric',

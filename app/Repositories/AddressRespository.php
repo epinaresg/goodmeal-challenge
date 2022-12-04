@@ -11,6 +11,12 @@ class AddressRespository
         return Address::create($data);
     }
 
+    public function update(Address $address, array $data): Address
+    {
+        $address->update($data);
+        return $address;
+    }
+
     public function removeDefault(): bool
     {
         return Address::where('id', '!=', '')->update([
@@ -21,5 +27,10 @@ class AddressRespository
     public function getDefaultAddress(): ?Address
     {
         return Address::where('default', '=', '1')->first();
+    }
+
+    public function byId(string $id): ?Address
+    {
+        return Address::find($id);
     }
 }

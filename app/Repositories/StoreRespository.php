@@ -13,6 +13,11 @@ class StoreRespository
         return Store::all();
     }
 
+    public function getWhereIdNotIn(array $ids): Collection
+    {
+        return Store::whereNotIn('id', $ids)->get();
+    }
+
     public function paginate(): LengthAwarePaginator
     {
         return Store::paginate();

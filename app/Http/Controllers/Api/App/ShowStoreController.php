@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\App;
 
 use App\Http\Resources\Api\App\ShowStoreProductsResource;
-use App\Http\Resources\Api\Backoffice\Store\ShowStoreResource;
+use App\Http\Resources\Api\App\ShowStoreResource;
 use App\Models\Store;
 use App\UseCases\Api\App\ListProductsGroupByCategory;
 use Illuminate\Http\JsonResponse;

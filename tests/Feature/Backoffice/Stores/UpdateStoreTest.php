@@ -93,6 +93,34 @@ class UpdateStoreTest extends TestCase
     }
 
     /** @test */
+    public function the_latitude_is_required()
+    {
+        $data = $this->getData();
+        unset($data['latitude']);
+
+        $response = $this->makeRequest($this->store->id, $data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('latitude');
+        $this->assertEquals(count($responseData['errors']), 1);
+    }
+
+    /** @test */
+    public function the_longitude_is_required()
+    {
+        $data = $this->getData();
+        unset($data['longitude']);
+
+        $response = $this->makeRequest($this->store->id, $data);
+        $responseData = $response->decodeResponseJson();
+
+        $response->assertStatus(422, $response->status());
+        $response->assertJsonValidationErrorFor('longitude');
+        $this->assertEquals(count($responseData['errors']), 1);
+    }
+
+    /** @test */
     public function the_delivery_flag_is_required()
     {
         $data = $this->getData();
@@ -237,6 +265,10 @@ class UpdateStoreTest extends TestCase
             'name' => $name,
             'slug' => Str::slug($name, '-'),
             'address' => $this->faker->address(),
+
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude(),
+
             'rating' => rand(1, 5),
             'delivery' => rand(0, 1),
             'take_out' => rand(0, 1),

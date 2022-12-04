@@ -31,6 +31,9 @@ class ListStoresGroupByStockResource extends JsonResource
             "price_without_discount" => number_format($this->price_without_discount, 0, '', '.'),
 
             "products_with_stock" => $this->products_with_stock,
+
+            "distance_km" => $this->distance_km,
+            "distance_walk" => $this->distance_walk,
         ];
     }
 }

@@ -28,6 +28,7 @@ class ListProductsGroupByCategory
             foreach ($product->product_categories as $productCategory) {
                 if (!isset($productsArr[$productCategory->category_id])) {
                     $productsArr[$productCategory->category_id] = [
+                        'category_id' => $productCategory->category_id,
                         'category_name' => $categories->where('id', $productCategory->category_id)->first()->name,
                         'products' => []
                     ];

@@ -23,6 +23,8 @@ class StoreSeeder extends Seeder
             'delivery' => 1,
             'take_out' => 1,
             'rating' => '4.3',
+            'latitude' => '-12.1202808',
+            'longitude' => '-77.040878',
             'kind_of_attention' => 'Retiro o delivery'
         ]);
 
@@ -35,6 +37,8 @@ class StoreSeeder extends Seeder
             'delivery' => 0,
             'take_out' => 1,
             'rating' => '5',
+            'latitude' => '-12.118193',
+            'longitude' => '-77.0346952',
             'kind_of_attention' => 'Retiro'
         ]);
 
@@ -47,6 +51,8 @@ class StoreSeeder extends Seeder
             'delivery' => 1,
             'take_out' => 1,
             'rating' => '4.7',
+            'latitude' => '-12.1314512',
+            'longitude' => '-77.0203546',
             'kind_of_attention' => 'Retiro o delivery'
         ]);
 
@@ -59,7 +65,12 @@ class StoreSeeder extends Seeder
             'delivery' => 1,
             'take_out' => 0,
             'rating' => '4.9',
+            'latitude' => '-12.1181312',
+            'longitude' => '-77.0350441',
             'kind_of_attention' => 'Delivery'
         ]);
+
+
+        //Store::factory()->times(50)->create();
     }
 }

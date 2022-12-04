@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Store;
-use App\Models\StoreSchedule;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -20,14 +18,21 @@ class ProductSeeder extends Seeder
     {
         $stores = Store::all();
 
-        foreach ($stores as $store) {
+        foreach ($stores as  $store) {
             $qty = rand(5, 20);
 
+            $stock = rand(0, 1);
 
             for ($i=0; $i < $qty; $i++) {
-                $product = Product::factory()->create([
+                $data = [
                     'store_id' => $store->id
-                ]);
+                ];
+
+                if ($stock == 0) {
+                    $data['stock'] = 0;
+                }
+
+                $product = Product::factory()->create($data);
 
                 $categories = $store->categories->shuffle()->slice(5);
 

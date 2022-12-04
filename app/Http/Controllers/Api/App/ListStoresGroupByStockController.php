@@ -11,7 +11,9 @@ class ListStoresGroupByStockController extends Controller
 {
     public function __invoke(): JsonResponse
     {
-        $items = (new ListStoresGroupByStockUseCase())->__invoke();
+        $addressId = request()->address_id;
+
+        $items = (new ListStoresGroupByStockUseCase())->__invoke($addressId);
 
         return response()->json([
             'with_stock' => ListStoresGroupByStockResource::collection($items['with_stock']),

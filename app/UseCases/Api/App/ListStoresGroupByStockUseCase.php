@@ -2,19 +2,39 @@
 
 namespace App\UseCases\Api\App;
 
+use App\Repositories\AddressRespository;
 use App\Repositories\StoreRespository;
 
 class ListStoresGroupByStockUseCase
 {
-    private $repository;
+    private $storeRepository;
+    private $addressRespository;
     public function __construct()
     {
-        $this->repository = new StoreRespository();
+        $this->storeRepository = new StoreRespository();
+        $this->addressRespository = new AddressRespository();
     }
 
-    public function __invoke(): array
+    public function __invoke(?string $addressId): array
     {
-        $stores = $this->repository->get();
+        $stores = $this->storeRepository->get();
+
+        if ($addressId) {
+            $address = $this->addressRespository->byId($addressId);
+
+            if ($address) {
+                $distanceData = ($address->distances_data) ? json_decode($address->distances_data, true) : [];
+
+                foreach ($stores as $k => $store) {
+                    $stores[$k]->distance_km = '';
+                    $stores[$k]->distance_walk = '';
+                    if (isset($distanceData[$store->id])) {
+                        $stores[$k]->distance_km = $distanceData[$store->id]['km'] . ' km';
+                        $stores[$k]->distance_walk = $distanceData[$store->id]['walk'] . ' min';
+                    }
+                }
+            }
+        }
 
         $storesArr = [
             'with_stock' => $stores->where('products_with_stock', '>', 0),

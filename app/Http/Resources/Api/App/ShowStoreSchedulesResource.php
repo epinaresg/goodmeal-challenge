@@ -17,8 +17,8 @@ class ShowStoreSchedulesResource extends JsonResource
         return [
             "id" => $this->id,
             "type" => $this->type,
-            "start_hour" => $this->start_hour,
-            "end_hour" => $this->end_hour,
+            "start_hour" => substr($this->start_hour, 0, 5),
+            "end_hour" => substr($this->end_hour, 0, 5),
         ];
     }
 }

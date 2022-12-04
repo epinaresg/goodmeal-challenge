@@ -18,5 +18,7 @@ class Address extends Model
         'latitude',
         'longitude',
         'default',
+        'distances_store',
+        'distances_data',
     ];
 }

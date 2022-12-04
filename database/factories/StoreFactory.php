@@ -20,12 +20,14 @@ class StoreFactory extends Factory
         $name = fake()->company();
 
         return [
-            'logo' => fake()->url(),
-            'background' => fake()->url(),
+            'logo' => 'https://picsum.photos/200',
+            'background' => 'https://picsum.photos/1920/500',
             'name' => $name,
             'slug' => Str::slug($name, '-'),
             'products_with_stock' => rand(0, 1),
             'address' => fake()->address(),
+            'latitude' => fake()->latitude(),
+            'longitude' => fake()->longitude(),
             'rating' => rand(1, 5),
             'delivery' => rand(0, 1),
             'take_out' => rand(0, 1),

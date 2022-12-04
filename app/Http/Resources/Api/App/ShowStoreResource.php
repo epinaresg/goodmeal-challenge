@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api\App;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShowCategoryResource extends JsonResource
+class ShowStoreResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,6 +18,10 @@ class ShowCategoryResource extends JsonResource
 
             "id" => $this->id,
             "name" => $this->name,
+
+            "logo" => $this->logo,
+            "background" => $this->background,
+
             "address" => $this->address,
             "slug" => $this->slug,
             "delivery" => $this->delivery,

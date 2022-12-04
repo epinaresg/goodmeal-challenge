@@ -2,6 +2,7 @@
 
 $black-color: #000;
 $grey-light-color: #c7c7c7;
+$grey-color: #797979;
 $white-color: #fff;
 $primary-color: #5138ee;
 $primary-bg-color: #f3f1fe;
@@ -11,8 +12,16 @@ $primary-bg-color: #f3f1fe;
     font-family: "Nunito", sans-serif;
 }
 
+body,
+html {
+    height: 100%;
+}
+
 .fs-12 {
     font-size: 12px;
+}
+.fs-13 {
+    font-size: 13px;
 }
 .fs-14 {
     font-size: 14px;
@@ -30,15 +39,18 @@ $primary-bg-color: #f3f1fe;
     font-size: 20px;
 }
 
+.fc-primary {
+    color: $primary-color;
+}
+
+.w-icon {
+    width: 22px;
+}
+
 .addressBar {
-    position: fixed;
     background-color: $white-color;
-    z-index: 1;
     width: 100%;
-    top: 0;
-    left: 0;
     padding: 0 15px;
-    height: 72px;
     .addressText {
         text-overflow: ellipsis;
         overflow: hidden;
@@ -53,13 +65,8 @@ $primary-bg-color: #f3f1fe;
 }
 
 .tabsContainer {
-    height: 69px;
-    position: fixed;
-    left: 0;
-    top: 72px;
     padding: 0 15px;
     background-color: $white-color;
-    z-index: 2;
     width: 100%;
     .nav {
         border-bottom: 1px solid #ccc;
@@ -77,13 +84,12 @@ $primary-bg-color: #f3f1fe;
 }
 
 .itemsContainer {
-    position: relative;
-    top: 141px;
-    margin-bottom: 20px;
-    padding-bottom: 88px;
+    height: calc(100% - 228px);
+    overflow-y: auto;
+    margin-top: 10px;
     .item {
         border-radius: 20px;
-        box-shadow: 0 0 7px 2px rgb(0 0 0 / 20%);
+        box-shadow: 0 0 7px 2px rgb(0 0 0 / 10%);
         overflow: hidden;
         .background {
             background-position: center;
@@ -164,22 +170,137 @@ $primary-bg-color: #f3f1fe;
 }
 
 .bottomMenuContainer {
-    height: 88px;
     background-color: $white-color;
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
     width: 100%;
     padding: 20px 15px 20px;
     a {
         display: block;
+        font-size: 20px;
+        text-decoration: none;
         span {
             display: block;
+            font-weight: bold;
+            font-size: 15px;
         }
-        &.active {
-            color: $primary-color;
+        &.router-link-active {
+            i {
+                color: $primary-color;
+            }
+            span {
+                color: $primary-color;
+            }
         }
     }
+}
+
+.storeHeaderBar {
+    height: 72px;
+    text-align: center;
+    .title {
+        font-weight: bold;
+    }
+}
+
+.storeBackground {
+    background-position: center;
+    height: 90px;
+    position: relative;
+    .logo {
+        background: $white-color;
+        border-radius: 50%;
+        height: 90px;
+        overflow: hidden;
+        position: absolute;
+        right: 20px;
+        bottom: -45px;
+        width: 90px;
+        img {
+            height: 100%;
+        }
+    }
+}
+
+.listProductsContainer {
+    height: calc(100% - 410px);
+    margin-bottom: 20px;
+    overflow: hidden;
+    .categoryTabsContainer {
+        padding: 0 15px;
+        background-color: $white-color;
+        width: 100%;
+        overflow-x: auto;
+        margin-bottom: 4px;
+        .slideContainer {
+            width: max-content;
+            .nav {
+                border-bottom: 1px solid #ccc;
+                width: 100%;
+                .nav-link {
+                    background: transparent;
+                    font-weight: bold;
+                    border: 0;
+                    color: $black-color;
+                    float: left;
+                    border-bottom: 4px solid transparent;
+                    &.active {
+                        color: $primary-color;
+                        border-bottom: 4px solid $primary-color;
+                    }
+                }
+            }
+        }
+    }
+    .productItemsContainer {
+        overflow-y: auto;
+        height: calc(100% - 53px);
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 0;
+            box-shadow: 0 0 7px 2px rgb(0 0 0 / 10%);
+            .btnAddToCart {
+                z-index: 2;
+                right: 10px;
+                top: 10px;
+                font-size: 30px;
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 0;
+                background-color: #fff;
+                cursor: pointer;
+                i {
+                    position: relative;
+                    color: $primary-color;
+                    top: -6px;
+                }
+            }
+            .card-body {
+                padding: 10px;
+                .priceDiscount {
+                    .withoutDiscount {
+                        padding-right: 6px;
+                        strong {
+                            color: $primary-color;
+                        }
+                    }
+                    .withDiscount {
+                        text-decoration: line-through;
+                        strong {
+                            color: $grey-light-color;
+                        }
+                    }
+                }
+                .card-title {
+                    color: $grey-color;
+                }
+            }
+        }
+    }
+}
+
+.btn-primary {
+    background-color: $primary-color !important;
 }
