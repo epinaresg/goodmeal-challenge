@@ -1,0 +1,1049 @@
+openapi: "3.0.0"
+
+info:
+  version: "1.0"
+  title: "GoodMeal - Demo"
+  description: Api para el backoffice y el app
+
+servers:
+  - url: http://localhost/api
+    description: Basepath
+tags:
+  - name: Backoffice - Tiendas
+    description: Crud para tus tiendas
+  - name: Backoffice - Categorias
+    description: Crud para tus categorias
+  - name: Backoffice - Productos
+    description: Crud para tus productos
+  - name: App - Tiendas
+    description: Listado y detalle de tienda
+  - name: App - Dirección
+    description: Guardar y obtener dirección
+  - name: App - Carrito de compra
+    description: Obtener carrito, agregar producto y cerrar
+  - name: App - Ordenes
+    description: Listado y detalle de ordenes
+
+paths:
+  /back-office/stores:
+    get:
+      tags:
+        - Backoffice - Tiendas
+      summary: Listado de tiendas
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        logo:
+                          type: string
+                        name:
+                          type: string
+                        slug:
+                          type: string
+                        address:
+                          type: string
+    post:
+      tags:
+        - Backoffice - Tiendas
+      summary: Crear tienda
+      requestBody:
+        description: Crear nueva tienda
+        content:
+          application/json:
+            schema:
+              required:
+                - logo
+                - background
+                - name
+                - address
+                - delivery
+                - take_out
+                - rating
+                - latitude
+                - longitude
+              $ref: "#/components/schemas/Tienda"
+      responses:
+        "201":
+          description: Creado correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+
+  /back-office/stores/{storeId}:
+    get:
+      tags:
+        - Backoffice - Tiendas
+      summary: Detalle de tienda
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  address:
+                    type: string
+                  slug:
+                    type: string
+                  delivery:
+                    type: string
+                  take_out:
+                    type: string
+                  rating:
+                    type: string
+                  schedules:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        start_hour:
+                          type: string
+                        end_hour:
+                          type: string
+        "404":
+          description: Tienda no encontrada
+    put:
+      tags:
+        - Backoffice - Tiendas
+      summary: Editar tienda
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Edita una tienda
+        content:
+          application/json:
+            schema:
+              required:
+                - logo
+                - background
+                - name
+                - address
+                - delivery
+                - take_out
+                - rating
+                - latitude
+                - longitude
+              $ref: "#/components/schemas/Tienda"
+      responses:
+        "201":
+          description: Creado correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+    delete:
+      tags:
+        - Backoffice - Tiendas
+      summary: Eliminar tienda
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Eliminado correctamente
+        "404":
+          description: Tienda no encontrada
+
+  /back-office/stores/{storeId}/categories:
+    get:
+      tags:
+        - Backoffice - Categorias
+      summary: Listado de categorias
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+    post:
+      tags:
+        - Backoffice - Categorias
+      summary: Crear categoria
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Crear nueva categoria
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              $ref: "#/components/schemas/Categoria"
+      responses:
+        "201":
+          description: Creado correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+
+  /back-office/stores/{storeId}/categories/{categoryId}:
+    get:
+      tags:
+        - Backoffice - Categorias
+      summary: Detalle de categoria
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+        - name: categoryId
+          in: path
+          description: ID de la categoria
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+        "404":
+          description: Categoria no encontrada
+    put:
+      tags:
+        - Backoffice - Categorias
+      summary: Editar categoria
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+        - name: categoryId
+          in: path
+          description: ID de la categoria
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Edita una categoria
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              $ref: "#/components/schemas/Categoria"
+      responses:
+        "201":
+          description: Creado correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+    delete:
+      tags:
+        - Backoffice - Categorias
+      summary: Eliminar categoria
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+        - name: categoryId
+          in: path
+          description: ID de la categoria
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Eliminado correctamente
+        "404":
+          description: Tienda no encontrada
+
+  /back-office/stores/{storeId}/products:
+    get:
+      tags:
+        - Backoffice - Productos
+      summary: Listado de productos
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        image:
+                          type: string
+                        price_with_discount:
+                          type: string
+                        price_without_discount:
+                          type: string
+    post:
+      tags:
+        - Backoffice - Productos
+      summary: Crear producto
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Crear nueva producto
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - image
+                - price_without_discount
+                - price_with_discount
+                - stock
+              $ref: "#/components/schemas/Producto"
+      responses:
+        "201":
+          description: Creado correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+
+  /back-office/stores/{storeId}/products/{productId}:
+    get:
+      tags:
+        - Backoffice - Productos
+      summary: Detalle de producto
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  image:
+                    type: string
+                  price_with_discount:
+                    type: string
+                  price_without_discount:
+                    type: string
+                  schedules:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        category_id:
+                          type: string
+        "404":
+          description: Categoria no encontrada
+    put:
+      tags:
+        - Backoffice - Productos
+      summary: Editar producto
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: ID del categoria
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Edita un producto
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              $ref: "#/components/schemas/Producto"
+      responses:
+        "201":
+          description: Creado correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+    delete:
+      tags:
+        - Backoffice - Productos
+      summary: Eliminar producto
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Eliminado correctamente
+        "404":
+          description: Tienda no encontrada
+
+  /stores:
+    get:
+      tags:
+        - App - Tiendas
+      summary: Listado de tiendas agrupado por stock
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  with_stock:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ListStore"
+                  without_stock:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ListStore"
+
+  /stores/{storeId}:
+    get:
+      tags:
+        - App - Tiendas
+      summary: Detalle de tienda
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  store:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        logo:
+                          type: string
+                        background:
+                          type: string
+                        address:
+                          type: string
+                        slug:
+                          type: string
+                        delivery:
+                          type: string
+                        take_out:
+                          type: string
+                        rating:
+                          type: string
+                        products_with_stock:
+                          type: string
+                        schedules:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              type:
+                                type: string
+                              start_hour:
+                                type: string
+                              end_hour:
+                                type: string
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category_id:
+                          type: string
+                        category_name:
+                          type: string
+                        logo:
+                          type: string
+                        items:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                              image:
+                                type: string
+                              price_with_discount:
+                                type: string
+                              price_without_discount:
+                                type: string
+
+        "404":
+          description: Tienda no encontrada
+
+  /addresses:
+    get:
+      tags:
+        - App - Dirección
+      summary: Obtener dirección
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  address:
+                    type: string
+                  latitude:
+                    type: string
+                  longitude:
+                    type: string
+
+    post:
+      tags:
+        - App - Dirección
+      summary: Registrar dirección
+      requestBody:
+        description: Crear una nueva dirección
+        content:
+          application/json:
+            schema:
+              required:
+                - address
+                - latitude
+                - longitude
+                - address
+              $ref: "#/components/schemas/Direccion"
+      responses:
+        "201":
+          description: Registrada correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+
+  /stores/{storeId}/carts:
+    get:
+      tags:
+        - App - Carrito de compra
+      summary: Obtener carrito de compra
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  qty_products:
+                    type: integer
+                  total:
+                    type: string
+                  total_delivery:
+                    type: string
+                  total_with_delivery:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        qty:
+                          type: integer
+                        total:
+                          type: string
+
+        "404":
+          description: Tienda no encontrada
+    post:
+      tags:
+        - App - Carrito de compra
+      summary: Agregar producto al carrito de compra
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Agregar producto
+        content:
+          application/json:
+            schema:
+              required:
+                - product_id
+              properties:
+                product_id:
+                  type: string
+                  example: 01gkfhr8fhfr6z19x8m9en0xm3
+      responses:
+        "201":
+          description: Registrada correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+
+  /stores/{storeId}/carts/close:
+    post:
+      tags:
+        - App - Carrito de compra
+      summary: Agregar producto al carrito de compra
+      parameters:
+        - name: storeId
+          in: path
+          description: ID de la tienda
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Agregar producto
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - "take_out"
+                    - "delivery"
+                  example: "take_out"
+      responses:
+        "201":
+          description: Registrada correctamente
+        "400":
+          description: Hubo algun problema con el registro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+
+  /orders:
+    get:
+      tags:
+        - App - Ordenes
+      summary: Listado de ordenes
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  with_stock:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        code:
+                          type: string
+                        order_date:
+                          type: string
+                        order_time:
+                          type: string
+                        order_type:
+                          type: string
+                        state:
+                          type: string
+                        store_name:
+                          type: string
+                        total:
+                          type: string
+
+  /orders/{orderId}:
+    get:
+      tags:
+        - App - Ordenes
+      summary: Detalle de orden
+      parameters:
+        - name: orderId
+          in: path
+          description: ID de la orden
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  code:
+                    type: string
+                  order_date:
+                    type: string
+                  order_time:
+                    type: string
+                  order_type:
+                    type: string
+                  state:
+                    type: string
+                  store_address:
+                    type: string
+                  store_name:
+                    type: string
+                  total:
+                    type: string
+                  total_delivery:
+                    type: string
+                  total_with_delivery:
+                    type: string
+
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        qty:
+                          type: integer
+                        total:
+                          type: string
+
+        "404":
+          description: Orden no encontrada
+
+components:
+  schemas:
+    Tienda:
+      type: object
+      properties:
+        logo:
+          type: string
+          example: https://picsum.photos/id/20/200
+        background:
+          type: string
+          example: "https://picsum.photos/id/45/1920/500"
+        name:
+          type: string
+          example: OZU - Asian Peruvian Cuisine
+        address:
+          type: string
+          example: Av. Alfredo Benavides 4862, Santiago de Surco
+        take_out:
+          type: string
+          example: "1"
+          enum:
+            - "0"
+            - "1"
+        delivery:
+          type: string
+          example: "0"
+          enum:
+            - "0"
+            - "1"
+        rating:
+          type: string
+          example: "4.5"
+        latitude:
+          type: string
+          example: "-12.1281579"
+        longitude:
+          type: string
+          example: "-76.9889705"
+        schedules:
+          type: object
+          properties:
+            delivery:
+              type: object
+              properties:
+                start_hour:
+                  type: string
+                  example: "10:00"
+                end_hour:
+                  type: string
+                  example: "22:00"
+            take_out:
+              type: object
+              properties:
+                start_hour:
+                  type: string
+                  example: "12:00"
+                end_hour:
+                  type: string
+                  example: "22:00"
+    Categoria:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Promociones
+    Producto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Bife de chorizo con papas fritas
+        image:
+          type: string
+          example: https://picsum.photos/id/341/200
+        price_without_discount:
+          type: string
+          example: "10000"
+        price_with_discount:
+          type: string
+          example: "4000"
+        stock:
+          type: string
+          example: "10"
+        product_categories:
+          type: array
+          items:
+            type: object
+            properties:
+              category_id:
+                type: string
+                example: "01gkfbzsr3c19a1psc6av1satq"
+    ListStore:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+        background:
+          type: string
+        opening_hours:
+          type: string
+        kind_of_attention:
+          type: string
+        delivery:
+          type: string
+        take_out:
+          type: string
+        price_with_discount:
+          type: string
+        price_without_discount:
+          type: string
+        products_with_stock:
+          type: string
+        distance_km:
+          type: string
+        distance_walk:
+          type: string
+    Direccion:
+      type: object
+      properties:
+        address:
+          type: string
+          example: Calle Cristobal Colon Mz.A Lt.20 Urb. Pablo Canepa, La Molina
+        latitude:
+          type: string
+          example: -12.067559
+        longitude:
+          type: string
+          example: -76.9472358
