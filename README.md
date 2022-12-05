@@ -16,6 +16,6 @@ Utilizamos Laravel Sail para levantar el entorno de desarrollo (https://laravel.
     5. ./vendor/bin/sail artisan migrate:fresh --seed
     6. npm install
     7. npm run dev
-    8. ./vendor/bin/sail route:clear
-    9. ./vendor/bin/sail config:cache
+    8. ./vendor/bin/sail artisan route:clear
+    9. ./vendor/bin/sail artisan config:cache
     10. Ingresar a http://localhost/
