@@ -19,3 +19,17 @@ Utilizamos Laravel Sail para levantar el entorno de desarrollo (https://laravel.
     8. ./vendor/bin/sail artisan route:clear
     9. ./vendor/bin/sail artisan config:cache
     10. Ingresar a http://localhost/
+
+# Correr tests
+
+Todos los test
+
+    ./vendor/bin/sail test
+
+Solo los endpoints del App
+
+    ./vendor/bin/sail test --filter=App
+
+Solo los endpoints del Backoffice
+
+    ./vendor/bin/sail test --filter=Backoffice
