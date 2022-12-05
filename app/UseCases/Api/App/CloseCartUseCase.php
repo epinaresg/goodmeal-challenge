@@ -40,6 +40,14 @@ class CloseCartUseCase
             'open' => 0,
         ];
 
+        if ($store->delivery == 0 && $data['type'] === 'delivery') {
+            throw new \Exception('La tienda no acepta delivery.', JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        if ($store->take_out == 0 && $data['type'] === 'take_out') {
+            throw new \Exception('La tienda no acepta recojo en tienda.', JsonResponse::HTTP_BAD_REQUEST);
+        }
+
         if ($data['type'] === 'delivery') {
             $address = $this->addressRepository->getDefaultAddress();
 
