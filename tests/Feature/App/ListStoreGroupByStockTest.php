@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Categories;
+namespace Tests\Feature\App;
 
 use App\Models\Store;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -40,6 +40,8 @@ class ListStoreGroupByStockTest extends TestCase
                     'price_without_discount',
                     'products_with_stock',
                     'take_out',
+                    'distance_km',
+                    'distance_walk',
                 ]
             ],
             'without_stock' => [
@@ -55,12 +57,15 @@ class ListStoreGroupByStockTest extends TestCase
                     'price_without_discount',
                     'products_with_stock',
                     'take_out',
+                    'distance_km',
+                    'distance_walk',
                 ]
             ],
         ];
     }
 
 
+    /** @test */
     public function check_response_structure()
     {
         $response = $this->makeRequest();
