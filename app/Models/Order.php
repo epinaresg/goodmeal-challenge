@@ -17,6 +17,7 @@ class Order extends Model
         'store_id',
         'qty_products',
         'total',
+        'total_delivery',
         'total_with_delivery',
         'store_name',
         'store_address',
@@ -28,6 +29,7 @@ class Order extends Model
         'customer_address',
         'state'
     ];
+
 
     public function store()
     {

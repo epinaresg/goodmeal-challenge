@@ -15,9 +15,9 @@ class GetDefaultAddressController
 
         if ($address) {
             (new CalculateStoreDistanceUseCase())->__invoke($address);
-            return response()->json(new ShowDefaultAddressResource($address), JsonResponse::HTTP_CREATED);
+            return response()->json(new ShowDefaultAddressResource($address), JsonResponse::HTTP_OK);
         }
 
-        return response()->json([], JsonResponse::HTTP_CREATED);
+        return response()->json([], JsonResponse::HTTP_OK);
     }
 }
